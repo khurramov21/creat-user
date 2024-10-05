@@ -68,3 +68,63 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+    // {
+    //   id: 1,
+    //   image: 'https://picsum.photos/400?random=1',
+    //   firstName: 'Dilnur',
+    //   lastName: 'Xurramov',
+    //   age: 19,
+    //   from: 'Uzbekistan',
+    //   job: 'Frontend Developer',
+    //   gender: 'Male'
+    // },
+
+
+import React, { useEffect, useRef, useState } from "react";
+// import Timer from "./components/Timer.jsx";
+export default function App() {
+  const inputRef = useRef();
+
+  const [state, setState] = useState(0);
+  useEffect(() => {
+    inputRef.current.focus();
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
+
+  useEffect(() => {
+    console.log("Another useEffect!");
+  }, [state]);
+
+  const submit = () => {
+    console.log(inputRef.current.value);
+  };
+
+  return (
+    <div>
+      <h1>{state}</h1>
+      <input type="text" ref={inputRef} />
+      <button onClick={submit}>Submit</button>
+      <button onClick={() => setState((p) => (p += 1))}>Increase</button>
+      <hr />
+      {/* {[1, 2, 3].map((i) => {
+        return (
+          <Timer
+            user={"Dilnur"}
+            abc={xyz}
+            key={i}
+            className={"abc"}
+            children={"Muhammad Ali"}
+          ></Timer>
+        );
+      })} */}
+    </div>
+  );
+}
+
+export function SayHi() {
+  return <div>Muchacho</div>;
+}
